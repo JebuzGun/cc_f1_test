@@ -1,0 +1,49 @@
+{
+  "database": "hearthstone-deck-db",
+  "version": 1,
+  "encrypted": false,
+  "mode": "full",
+  "tables": [
+    {
+      "name": "cards",
+      "schema": [
+        { "column": "id", "value": "TEXT PRIMARY KEY NOT NULL"},
+        { "column": "artist", "value": "TEXT"},
+        { "column": "attack", "value": "INTEGER"},
+        { "column": "cardSet", "value": "INTEGER"},
+        { "column": "collectible", "value": "BOOLEAN"},
+        { "column": "cost", "value": "INTEGER"},
+        { "column": "dbfId", "value": "TEXT"},
+        { "column": "flavor", "value": "TEXT"},
+        { "column": "health", "value": "INTEGER"},
+        { "column": "img", "value": "TEXT"},
+        { "column": "locale", "value": "TEXT"},
+        { "column": "mechanics", "value": "TEXT"},
+        { "column": "name", "value": "TEXT"},
+        { "column": "playerClass", "value": "TEXT"},
+        { "column": "rarity", "value": "TEXT"},
+        { "column": "spellSchool", "value": "TEXT"},
+        { "column": "text", "value": "TEXT"},
+        { "column": "type", "value": "TEXT"},
+        { "column": "last_modified", "value": "INTEGER DEFAULT (strftime('%s', 'now'))" }
+      ],
+      "values": []
+    }, {
+      "name": "decks",
+      "schema": [
+        { "column": "id", "value": "TEXT PRIMARY KEY NOT NULL"},
+        { "column": "name", "value": "TEXT"},
+        { "column": "last_modified", "value": "INTEGER DEFAULT (strftime('%s', 'now'))" }
+      ],
+      "values": []
+    }, {
+      "name": "cards_decks",
+      "schema": [
+        { "column": "id_card", "value": "TEXT"},
+        { "column": "id_deck", "value": "TEXT"},
+        { "column": "last_modified", "value": "INTEGER DEFAULT (strftime('%s', 'now'))" }
+      ],
+      "values": []
+    }
+  ]
+}

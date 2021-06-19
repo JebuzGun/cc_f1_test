@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{deckName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list *ngIf="!deckName">
+    <ion-item>
+      <ion-label position="floating">Nombre del mazo</ion-label>
+      <ion-input [formControl]="nameControl"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <br *ngIf="deckName">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="3" size="6">
+        <ion-button expand="block" (click)="addCards()" [disabled]="deckContent.length + selectedCards.length >= 50">
+          <ion-icon slot="start" name="add-circle"></ion-icon>
+          Cartas
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item *ngIf="addingCards">
+    <ion-label>Set</ion-label>
+    <ionic-selectable [(ngModel)]="selectedCardSet" [items]="cardSets" itemValueField="cardSet" itemTextField="cardSet"
+                      [canSearch]="true" (onChange)="cardSetChange()">
+    </ionic-selectable>
+  </ion-item>
+
+  <ion-item *ngIf="addingCards && selectedCardSet">
+    <ion-label>Cartas disponibles</ion-label>
+    <ionic-selectable #cardsComponent [(ngModel)]="selectedCards" [items]="cards"
+                      itemValueField="id" itemTextField="name" [canSearch]="true"
+                      [isConfirmButtonEnabled]="cardsComponent.itemsToConfirm.length >= 1 && cardsComponent.itemsToConfirm.length + deckContent.length <= 50"
+                      (onChange)="cardChange($event)" [isMultiple]="true">
+    </ionic-selectable>
+  </ion-item>
+
+  <ion-list-header *ngIf="addingCards && selectedCards.length > 0">
+    <ion-label>Cartas por agregar al mazo - {{selectedCards.length}}</ion-label>
+  </ion-list-header>
+
+  <ion-list *ngIf="addingCards && selectedCards.length > 0">
+    <ion-item *ngFor="let card of selectedCards" detail>
+      <ion-thumbnail slot="start">
+        <img src="../../assets/stone.png" *ngIf="!card.img">
+        <img defaultImage="../../assets/stone.png" [lazyLoad]="card.img" *ngIf="card.img">
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        <ion-text>
+          <h3>{{card.name}}</h3>
+        </ion-text>
+        <p [innerHTML]="card.text"></p>
+        <ion-text color="secondary">
+          <p>{{card.type}}</p>
+        </ion-text>
+        <p>Vida: {{card.health || 'S/I'}} - Costo: {{card.cost || 'S/I'}} - Ataque: {{card.attack || 'S/I'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid *ngIf="addingCards && selectedCards.length > 0">
+    <ion-row>
+      <ion-col offset="3" size="6">
+        <ion-button expand="block" (click)="addNewCards()" [disabled]="deckContent.length + selectedCards.length > 50 || (!nameControl.value && !deckName)">
+          Confirmar selección
+          <ion-icon slot="end" name="checkmark-circle"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <br>
+
+  <ion-list-header *ngIf="deckContent.length > 0">
+    <ion-label>Cartas del mazo - {{deckContent.length}}</ion-label>
+  </ion-list-header>
+
+  <ion-list *ngIf="deckContent.length > 0">
+    <ion-item-sliding *ngFor="let card of deckContent" #slidingItem>
+
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <!--TODO: Optimize with a custom hook-->
+          <img src="../../assets/stone.png" *ngIf="!card.img">
+          <img defaultImage="../../assets/stone.png" [lazyLoad]="card.img" *ngIf="card.img">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <ion-text>
+            <h3>{{card.name}}</h3>
+          </ion-text>
+          <p [innerHTML]="card.text"></p>
+          <ion-text color="secondary">
+            <p>{{card.type}}</p>
+          </ion-text>
+          <p>Vida: {{card.health || 'S/I'}} - Costo: {{card.cost || 'S/I'}} - Ataque: {{card.attack || 'S/I'}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="delete(card, slidingItem)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+</ion-content>

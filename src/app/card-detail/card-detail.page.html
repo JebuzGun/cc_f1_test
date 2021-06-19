@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Clase: {{card.playerClass || ''}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="card.img" class="vertical-center">
+    <div class="center">
+      <img [src]="card.img">
+    </div>
+  </div>
+  <ion-grid *ngIf="!card.img">
+    <ion-row>
+      <ion-col size="4">Nombre:</ion-col>
+      <ion-col size="8"> {{card.name}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Descripción:</ion-col>
+      <ion-col size="8"> {{card.text}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Ataque:</ion-col>
+      <ion-col size="8"> {{card.attack}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Costo:</ion-col>
+      <ion-col size="8"> {{card.cost}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Vida:</ion-col>
+      <ion-col size="8"> {{card.health}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Set de cartas:</ion-col>
+      <ion-col size="8"> {{card.cardSet}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Clase:</ion-col>
+      <ion-col size="8"> {{card.playerClass}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Coleccionable:</ion-col>
+      <ion-col size="8"> {{card.collectible}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Hechizo:</ion-col>
+      <ion-col size="8"> {{card.spellSchool}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Tipo:</ion-col>
+      <ion-col size="8"> {{card.type}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Artista:</ion-col>
+      <ion-col size="8"> {{card.artist}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">dbfId:</ion-col>
+      <ion-col size="8"> {{card.dbfId}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Localización:</ion-col>
+      <ion-col size="8"> {{card.locale}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Rareza:</ion-col>
+      <ion-col size="8"> {{card.rarity}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Mechanics:</ion-col>
+      <ion-col size="8"> {{card.mechanics | json}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

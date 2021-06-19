@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class TabsPage {
 
   constructor() {}
-
+  //TODO: Guard for wait the load of the DB
 }

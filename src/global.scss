@@ -24,3 +24,46 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.modal-new-card {
+  .modal-wrapper{
+    position: absolute;
+    bottom: 0 !important;
+    height: 95%;
+    left: 0;
+    right: 0;
+    width: 95%;
+    margin: auto;
+    border-radius: 1em 1em 0em 0em !important;
+    -webkit-box-shadow: -1px -8px 52px 0px rgba(0,0,0,0.47);
+    -moz-box-shadow: -1px -8px 52px 0px rgba(0,0,0,0.47);
+    box-shadow: -1px -8px 52px 0px rgba(0,0,0,0.47);
+  }
+
+  .ion-page{
+    border-radius: 1em 1em 0em 0em !important;
+  }
+
+  .header {
+    border-radius: 1em 1em 0em 0em !important;
+  }
+
+  .content {
+    border-radius: 1em 1em 0em 0em !important;
+
+  }
+
+  .toolbar {
+    border-radius: 1em 1em 0em 0em !important;
+  }
+  ion-backdrop{
+    z-index: -1 !important;
+    background-color: #000;
+    opacity: .3;
+    visibility: visible;
+  }
+  ion-content {
+
+  }
+}

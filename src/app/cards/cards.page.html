@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{cardSet}}</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="newCard()">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="cards">
+  <ion-list>
+    <ion-item *ngFor="let card of cards" detail (click)="seeCardDetail(card)">
+      <ion-thumbnail slot="start">
+        <!--TODO: Optimize with a custom hook-->
+        <img src="../../assets/stone.png" *ngIf="!card.img">
+        <img defaultImage="../../assets/stone.png" [lazyLoad]="card.img" *ngIf="card.img">
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        <ion-text>
+          <h3>{{card.name}}</h3>
+        </ion-text>
+        <p [innerHTML]="card.text"></p>
+        <ion-text color="secondary">
+          <p>{{card.type}}</p>
+        </ion-text>
+        <p>Vida: {{card.health || 'S/I'}} - Costo: {{card.cost || 'S/I'}} - Ataque: {{card.attack || 'S/I'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-content *ngIf="!cards">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let n of [1,1,1,1,1,1,1,1,1]">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

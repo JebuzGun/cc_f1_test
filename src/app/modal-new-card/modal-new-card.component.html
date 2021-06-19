@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ingresar carta</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="newCardForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input inputmode="text" formControlName="name"></ion-input>
+        <ion-row>
+          <ion-col size="12" text-center
+                   *ngIf="newCardForm.hasError('required', 'name') && newCardForm.controls['name'].dirty">
+            <ion-chip color="danger">
+              <ion-icon name="close-circle-outline" color="danger"></ion-icon>
+              <ion-label>Ingrese Nombre de carta</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ataque</ion-label>
+        <ion-input inputmode="numeric" formControlName="attack"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Vida</ion-label>
+        <ion-input inputmode="numeric" formControlName="health"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Costo</ion-label>
+        <ion-input inputmode="numeric" formControlName="cost"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Elemento</ion-label>
+        <ion-select cancelText="Cancelar">
+          <ion-select-option *ngFor="let spell of spellSchools" [value]="spell.spellSchool">{{spell.spellSchool}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select cancelText="Cancelar">
+          <ion-select-option *ngFor="let type of types" [value]="type.type">{{type.type}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Clase</ion-label>
+        <ion-select cancelText="Cancelar">
+          <ion-select-option *ngFor="let class of playersClass" [value]="class.playerClass">{{class.playerClass}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-textarea inputmode="text" formControlName="text"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Artista</ion-label>
+        <ion-input inputmode="text" formControlName="artist"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer style="height: 70px">
+  <ion-button style="width: 100%; height: 100%;padding: 0; margin: 0;" (click)="postNewCard()"
+              expand="full" color="primary" [disabled]="newCardForm.invalid">Guardar carta
+  </ion-button>
+</ion-footer>

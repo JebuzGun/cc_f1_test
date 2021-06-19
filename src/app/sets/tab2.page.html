@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Sets de cartas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="getCardSets($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngFor="let cardSet of cardsSets" detail (click)="navigateCards(cardSet.cardSet)">
+      <ion-label>{{cardSet.cardSet}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
