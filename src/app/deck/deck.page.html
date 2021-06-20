@@ -13,6 +13,14 @@
       <ion-label position="floating">Nombre del mazo</ion-label>
       <ion-input [formControl]="nameControl"></ion-input>
     </ion-item>
+    <ion-row>
+      <ion-col size="12" *ngIf="nameControl.untouched && selectedCards.length > 0">
+        <ion-chip color="danger">
+          <ion-icon name="close-circle-outline" color="danger"></ion-icon>
+          <ion-label>Ingrese Nombre del mazo</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
   </ion-list>
 
   <br *ngIf="deckName">

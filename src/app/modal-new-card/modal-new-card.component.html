@@ -18,8 +18,7 @@
         <ion-label position="stacked">Nombre</ion-label>
         <ion-input inputmode="text" formControlName="name"></ion-input>
         <ion-row>
-          <ion-col size="12" text-center
-                   *ngIf="newCardForm.hasError('required', 'name') && newCardForm.controls['name'].dirty">
+          <ion-col size="12" *ngIf="newCardForm.hasError('required', 'name') && newCardForm.controls['name'].dirty">
             <ion-chip color="danger">
               <ion-icon name="close-circle-outline" color="danger"></ion-icon>
               <ion-label>Ingrese Nombre de carta</ion-label>
